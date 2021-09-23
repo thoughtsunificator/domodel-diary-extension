@@ -1,0 +1,84 @@
+name: Build and publish extension
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and publish
+
+    steps:
+
+      - name: git-checkout
+        uses: actions/checkout@v2
+
+      - name: Install all dependencies
+        run: npm install
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-file
+          path: build/domodel-diary.zip
+
+      - name: Upload manifest
+        uses: actions/upload-artifact@v2
+        with:
+          name: manifest-file
+          path: public/manifest.json
+
+
+  publish-chrome:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+
+      - name: Download build
+        id: download
+        uses: actions/download-artifact@v2
+        with:
+          name: build-file
+
+      - name: test
+        run: echo ${{steps.download.outputs.download-path}}
+
+      - name: test
+        run: echo ${{steps.download.outputs.download-path}}
+
+      - name: Publish to Chrome
+        uses: thoughtsunificator/chrome-publish-action@master
+        with:
+          zip: ${{ steps.download.outputs.download-path }}/domodel-diary.zip
+          chrome-extension-id: hncoaagegcdnajffjpkldhfceipfgnnf
+          chrome-client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          chrome-refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          chrome-client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+
+  publish-firefox:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+
+      - name: Download build
+        id: download
+        uses: actions/download-artifact@v2
+
+      - name: test
+        run: ls ${{steps.download.outputs.download-path}}
+
+      - name: Publish to Firefox
+        uses: thoughtsunificator/firefox-publish-action@master
+        with:
+          zip: ${{ steps.download.outputs.download-path }}/build-file/domodel-diary.zip
+          firefox-jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
+          firefox-jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
+          firefox-guid: "{40b34433-7cf7-4064-bf3d-ba1f0c9b3524}"
+          firefox-manifest: ${{ steps.download.outputs.download-path }}/manifest-file/manifest.json
