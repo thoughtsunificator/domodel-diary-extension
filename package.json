@@ -41,6 +41,6 @@
 		"crypto-es": "^1.2.7",
 		"css-generics": "^1.0.4",
 		"domodel": "^1.0.46",
-		"domodel-diary": "^0.0.28"
+		"domodel-diary": "latest"
 	}
 }
