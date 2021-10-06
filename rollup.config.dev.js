@@ -6,7 +6,8 @@ import { nodeResolve } from "@rollup/plugin-node-resolve"
 import alias from "@rollup/plugin-alias"
 import rootImport from "rollup-plugin-root-import"
 import livereload from "rollup-plugin-livereload"
-import webExt from 'web-ext';
+import webExt from 'web-ext'
+import globImport from 'rollup-plugin-glob-import'
 
 export default {
 	input: "./src/main.js",
@@ -40,6 +41,7 @@ export default {
 			useInput: "prepend",
 			extensions: ".js",
 		}),
+		globImport(),
 		livereload('dist/dev/public'),
 		{
 			name: 'web-ext',

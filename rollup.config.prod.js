@@ -8,7 +8,8 @@ import { nodeResolve } from "@rollup/plugin-node-resolve"
 import rootImport from "rollup-plugin-root-import"
 import alias from "@rollup/plugin-alias"
 import webExt from 'web-ext';
-import { babel } from '@rollup/plugin-babel';
+import { babel } from '@rollup/plugin-babel'
+import globImport from 'rollup-plugin-glob-import'
 
 export default {
 	input: "./src/main.js",
@@ -42,6 +43,7 @@ export default {
 			useInput: "prepend",
 			extensions: ".js",
 		}),
+		globImport(),
 		terser(),
 		babel({ babelHelpers: 'bundled' }),
 		{
