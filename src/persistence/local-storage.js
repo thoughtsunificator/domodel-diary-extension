@@ -42,6 +42,8 @@ export default properties => {
 
 	diary.notes.listen("remove", () => save(diary))
 
+	diary.listen("imported", () => save(diary))
+
 	diary.listen("reset", () => localStorage.removeItem(ITEM_NAME))
 
 }
