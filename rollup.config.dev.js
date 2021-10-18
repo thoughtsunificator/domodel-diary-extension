@@ -9,6 +9,8 @@ import livereload from "rollup-plugin-livereload"
 import webExt from 'web-ext'
 import globImport from 'rollup-plugin-glob-import'
 
+let started = false
+
 export default {
 	input: "./src/main.js",
 	output: {
@@ -46,10 +48,13 @@ export default {
 		{
 			name: 'web-ext',
 			generateBundle() {
-				webExt.cmd.run({
-					target: ['chromium'],
-					sourceDir: path.resolve("dist/dev/public/"),
-				}, {}).then((extensionRunner) => {});
+				if(!started) {
+					started = true
+					webExt.cmd.run({
+						target: ['chromium'],
+						sourceDir: path.resolve("dist/dev/public/"),
+					}, {}).then((extensionRunner) => {});
+				}
 			}
 		}
 	]
