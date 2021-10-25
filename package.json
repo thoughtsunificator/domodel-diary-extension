@@ -1,6 +1,6 @@
 {
 	"name": "domodel-diary-extension",
-	"version": "1.6.88",
+	"version": "1.6.89",
 	"type": "module",
 	"description": "Browser extension context for domodel-diary",
 	"scripts": {
