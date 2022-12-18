@@ -1,6 +1,6 @@
 import CryptoES from "crypto-es";
 
-import Migration from "/object/migration.js"
+import Migration from "../../object/migration.js"
 
 import { ITEM_NAME } from "../local-storage.js"
 

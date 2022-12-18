@@ -1,4 +1,4 @@
-import "assets/main.css"
+import "./main.css"
 
 import { Core } from "domodel"
 import { DiaryModel, DiaryBinding, Diary } from "domodel-diary"

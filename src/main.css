@@ -6,7 +6,7 @@ body {
 	background-color: black;
 	color: white;
 	font-family: Arial;
-	min-width: 800px;
+	min-width: 900px;
 	min-height: 600px;
 }
 
@@ -67,10 +67,6 @@ input, select, button, textarea {
 	cursor: pointer;
 }
 
-.day.content {
-	position: relative;
-}
-
 .day.current {
 	background-color: #575e4c52;
 }
@@ -86,6 +82,7 @@ input, select, button, textarea {
 }
 
 .day.content {
+	position: relative;
 	text-decoration: underline;
 }
 
@@ -93,6 +90,10 @@ input, select, button, textarea {
 	background-color: #372121;
 	text-align: center;
 	font-size: 0.8em;
+}
+
+.day.grayed {
+	color: gray;
 }
 
 .editor {

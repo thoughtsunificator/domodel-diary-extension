@@ -1,6 +1,6 @@
 import { Observable } from "domodel"
 
-import Migrations from "/object/migrations.js"
+import Migrations from "../object/migrations.js"
 
 import * as MIGRATIONS from './migrations/*.js';
 
